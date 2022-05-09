@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { ChakraProvider, Flex } from '@chakra-ui/react'
+import { BrowserRouter } from "react-router-dom";
+import { Content } from './components/content/Content'
+import { Header } from './components/header/Header'
+import { Menu } from './components/menu/Menu'
+import { useAppSelector } from './hooks/redux';
+
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const notes = useAppSelector(state => state.notes.notes)
+
+    return (
+        <BrowserRouter>
+            <ChakraProvider>
+                <Flex h='100vh'>
+                    <Menu notes={notes}/>
+                    <Flex direction='column' w='full'>
+                        <Header />
+                        <Content notes={notes}/>
+                    </Flex>
+                </Flex>
+            </ChakraProvider>
+        </BrowserRouter>
+    )
 }
 
-export default App;
+export default App
