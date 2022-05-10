@@ -2,7 +2,7 @@ import { Box, Flex } from "@chakra-ui/layout"
 import { Route, Routes } from "react-router"
 import { NoteType, StatusEnum } from "../../store/noteSlice"
 import { Note } from "./Note"
-import { NoteIcon } from "./NoteIcon"
+import { Icon } from "./Icon"
 
 interface PropsType {
     notes: NoteType[]
@@ -15,8 +15,8 @@ export const Notes: React.FC<PropsType> = ({ notes, handleAction, setIsCreate })
     return (
         <Flex justifyContent='flex-start' flexWrap='wrap' mt='5'>
             {notes.map((note: NoteType) => (
-                <Box w='30%' h='40' mr='8' mb='8' key={note.id}>
-                    <NoteIcon note={note}  />
+                <Box w='30%' h='40' gap='8' key={note.id}>
+                    <Icon note={note}  />
                     <Routes>
                         <Route
                             path={note.id}

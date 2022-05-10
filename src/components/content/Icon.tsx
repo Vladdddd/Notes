@@ -1,15 +1,15 @@
-import { DeleteIcon } from "@chakra-ui/icons"
 import { Box } from "@chakra-ui/layout"
-import { IconButton, Text } from "@chakra-ui/react"
+import { Text } from "@chakra-ui/react"
 import { Link } from "react-router-dom"
 import { useAppDispatch } from "../../hooks/redux"
-import { NoteType, removeNote } from "../../store/noteSlice"
+import { NoteType } from "../../store/noteSlice"
+import { RemoveButton } from "./RemoveButton"
 
 interface PropsType {
     note: NoteType
 }
 
-export const NoteIcon: React.FC<PropsType> = ({ note }) => {
+export const Icon: React.FC<PropsType> = ({ note }) => {
     const dispatch = useAppDispatch()
     return (
         <Box w='full' h='full' pos='relative' zIndex='1'>
@@ -33,17 +33,7 @@ export const NoteIcon: React.FC<PropsType> = ({ note }) => {
                     overflow='hidden'
                 >{note.text}</Text>
             </Box></Link>
-            <IconButton
-                size='sm'
-                top='5%'
-                left={['50%', '65%', '70%', '75%', '83%', '85%']}
-                pos='absolute'
-                opacity='0.8'
-                aria-label='Remove'
-                icon={<DeleteIcon />}
-                _focus={{}}
-                onClick={() => dispatch(removeNote({ id: note.id }))}
-            />
+            <RemoveButton id={note.id}/>
         </Box>
     )
 }
