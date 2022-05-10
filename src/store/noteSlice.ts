@@ -39,7 +39,7 @@ const noteSlice = createSlice({
                 state.notes[index].caption = payload.caption
             }
         },
-        removeNote(state, action) {
+        removeNote(state, action: PayloadAction<{id: string}>) {
             state.notes = state.notes.filter((note: NoteType) => note.id !== action.payload.id)
         }
     }

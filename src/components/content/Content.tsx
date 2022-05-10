@@ -1,6 +1,6 @@
 import { Box, Button, ButtonGroup, Flex, IconButton } from "@chakra-ui/react"
 import { AddIcon } from '@chakra-ui/icons'
-import { addNote, editNote, NoteType, StatusEnum } from "../../store/noteSlice"
+import { addNote, editNote, NoteType, removeNote, StatusEnum } from "../../store/noteSlice"
 import { Notes } from "./Notes";
 import { useState } from "react";
 import { Note } from "./Note";
@@ -26,14 +26,19 @@ export const Content: React.FC<PropsType> = ({ notes }) => {
     const [isCreate, setIsCreate] = useState(false)
     const dispatch = useAppDispatch()
 
-    const handleAction: HandleActionType = (id, text, caption, status) => {
-        if (text.trim().length) {
+    const handleAction: HandleActionType = (id, text, caption, status) => { 
             if (status === StatusEnum.Add) {
-                dispatch(addNote({ caption, text }))
+                if (text.trim().length | caption.trim().length) {
+                    dispatch(addNote({ caption, text }))
+                }
             } else if(status === StatusEnum.Edit){
-                dispatch(editNote({ id, caption, text }))
+                if(!text.trim().length && !caption.trim().length) {
+                    dispatch(removeNote({ id }))
+                } else {
+                    dispatch(editNote({ id, caption, text }))
+                }
             }
-        }
+        
         setIsCreate(false)
     }
 

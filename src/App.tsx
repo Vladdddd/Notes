@@ -9,7 +9,7 @@ import { useAppSelector } from './hooks/redux';
 
 function App() {
     const notes = useAppSelector(state => state.notes.notes)
-
+    
     return (
         <BrowserRouter>
             <ChakraProvider>
