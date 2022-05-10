@@ -2,6 +2,7 @@ import { Text, Flex, IconButton, Box } from "@chakra-ui/react"
 import { EmailIcon, HamburgerIcon } from '@chakra-ui/icons'
 import { useState } from "react"
 import { NoteType } from "../../store/noteSlice"
+import { Link } from "react-router-dom"
 
 interface PropsType {
     notes: NoteType[]
@@ -18,7 +19,7 @@ export const Menu: React.FC<PropsType> = ({ notes }) => {
                 justify={isOpen ? 'center' : 'flex-start'}
                 direction={isOpen ? 'row' : 'column'}
             >
-                <IconButton
+                <Link to='/'><IconButton
                     mb='2'
                     aria-label='My Notes'
                     colorScheme='cyan'
@@ -26,7 +27,7 @@ export const Menu: React.FC<PropsType> = ({ notes }) => {
                     color='white'
                     _focus={{}}
                     icon={<EmailIcon />}
-                />
+                /></Link>
 
                 {isOpen && <Text pl='1.5' w='full' h='max-content' fontSize='2xl'>My Notes</Text>}
                 <IconButton

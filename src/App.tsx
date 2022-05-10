@@ -1,5 +1,5 @@
 import { ChakraProvider, extendTheme, Flex } from '@chakra-ui/react'
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Content } from './components/content/Content'
 import { Header } from './components/header/Header'
 import { Menu } from './components/menu/Menu'
@@ -8,22 +8,27 @@ import '@fontsource/inter/700.css'
 
 const theme = extendTheme({
     fonts: {
-      heading: 'Inter, sans-serif',
-      body: 'Segoe UI, sans-serif',
+        heading: 'Inter, sans-serif',
+        body: 'Segoe UI, sans-serif',
     },
-  })
+})
 
 function App() {
     const notes = useAppSelector(state => state.notes.notes)
-    
+
     return (
         <BrowserRouter>
             <ChakraProvider theme={theme}>
                 <Flex h='100vh'>
-                    <Menu notes={notes}/>
+                    <Menu notes={notes} />
                     <Flex direction='column' w='full'>
                         <Header />
-                        <Content notes={notes}/>
+                        <Routes>
+                            <Route
+                                path='*'
+                                element={<Content notes={notes} />}>
+                            </Route>
+                        </Routes>
                     </Flex>
                 </Flex>
             </ChakraProvider>
