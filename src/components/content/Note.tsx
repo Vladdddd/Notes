@@ -29,38 +29,48 @@ export const Note: React.FC<PropsType> = ({note, status, handleAction, setIsCrea
                 pos='absolute' 
                 top='0' left='0'
                 bg='gray.500'
-                opacity='0.5'
+                opacity='0.55'
                 zIndex='99'
                 onClick={() => setIsCreate(false)}
             ></Box></Link>
 
             <Box 
-                w='sm' h='xs' 
+                w='40%'
                 pos='absolute' 
-                top='24%' left='37%' 
-                borderRadius='0'
+                top='24%' left='30%' 
+                borderTopRadius='8' 
                 bg='white' zIndex='99'
             >
-                <Input 
+                <Textarea 
+                    minH='12'
+                    mt='2' pb='0'
                     border='0' focusBorderColor='0' 
+                    resize='none'
                     placeholder='Caption'
-                    fontSize='18px'
+                    fontSize='20px'
                     value={caption}
                     onChange={(e) => setCaption(e.target.value)}/>
                 <Textarea 
-                    h='full' 
+                    minH='48' 
+                    mb='2' pt='0'
                     border='0' 
                     borderRadius='0'  
                     focusBorderColor='0' 
                     resize='none' 
                     placeholder='Body' 
-                    fontSize='20px'
+                    fontSize='18px'
                     value={text}
                     onChange={(e) => setText(e.target.value)}
                     autoFocus
                     onFocus={onFocusText}
                 />
-                <Box width='full' pos='absolute' zIndex='5' bg='white'>
+                <Box 
+                    width='full' 
+                    pos='absolute' 
+                    zIndex='5' 
+                    bg='white'
+                    borderBottomRadius='8'
+                >
                     <Link to='/'><Button 
                         border='0'
                         float='right' 

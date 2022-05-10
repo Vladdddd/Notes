@@ -1,18 +1,24 @@
-import { ChakraProvider, Flex } from '@chakra-ui/react'
+import { ChakraProvider, extendTheme, Flex } from '@chakra-ui/react'
 import { BrowserRouter } from "react-router-dom";
 import { Content } from './components/content/Content'
 import { Header } from './components/header/Header'
 import { Menu } from './components/menu/Menu'
 import { useAppSelector } from './hooks/redux';
+import '@fontsource/inter/700.css'
 
-
+const theme = extendTheme({
+    fonts: {
+      heading: 'Inter, sans-serif',
+      body: 'Segoe UI, sans-serif',
+    },
+  })
 
 function App() {
     const notes = useAppSelector(state => state.notes.notes)
     
     return (
         <BrowserRouter>
-            <ChakraProvider>
+            <ChakraProvider theme={theme}>
                 <Flex h='100vh'>
                     <Menu notes={notes}/>
                     <Flex direction='column' w='full'>

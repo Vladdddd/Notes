@@ -22,14 +22,14 @@ export const NoteIcon: React.FC<PropsType> = ({ note }) => {
                 <Text 
                     h={['40%', '30%', '22%']} 
                     fontFamily='SFMono-Regular,Menlo,Monaco,Consolas,monospace' 
-                    fontSize='lg' 
+                    fontSize='17px' 
                     color='gray.800' 
                     overflow='hidden'
                 >{note.caption}</Text>
 
                 <Text 
                     h={['60%', '70%', '78%']} 
-                    fontSize={['2xl', 'xl']} 
+                    fontSize='20px'
                     overflow='hidden'
                 >{note.text}</Text>
             </Box></Link>
