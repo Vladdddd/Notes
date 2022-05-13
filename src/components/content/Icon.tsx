@@ -1,18 +1,28 @@
 import { Box } from "@chakra-ui/layout"
 import { Text } from "@chakra-ui/react"
 import { Link } from "react-router-dom"
-import { useAppDispatch } from "../../hooks/redux"
 import { NoteType } from "../../store/noteSlice"
 import { RemoveButton } from "./RemoveButton"
+import { motion } from "framer-motion"
+import { VariantsType } from "./Content"
 
 interface PropsType {
     note: NoteType
+    variants: VariantsType
 }
 
-export const Icon: React.FC<PropsType> = ({ note }) => {
-    const dispatch = useAppDispatch()
+export const Icon: React.FC<PropsType> = ({ note, variants }) => {
     return (
-        <Box w='full' h='full' pos='relative' zIndex='1'>
+        <Box 
+            as={motion.div}
+            variants={variants}
+            initial='hidden'
+            animate='visible'
+            exit='hidden'
+            w='full' h='full' 
+            pos='relative' 
+            zIndex='1'
+        >
             <Link to={note.id}><Box
                 p='5' pt='3'
                 w='full' h='full'

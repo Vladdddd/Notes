@@ -1,19 +1,21 @@
 import { Box, Flex, Text } from "@chakra-ui/layout"
 import { Button, Textarea } from "@chakra-ui/react"
+import { motion } from "framer-motion"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { NoteType, StatusEnum } from "../../store/noteSlice"
-import { HandleActionType } from "./Content"
+import { HandleActionType, VariantsType } from "./Content"
 import { RemoveButton } from "./RemoveButton"
 
 interface PropsType {
     note: NoteType
     status: StatusEnum
+    variants: VariantsType
     handleAction: HandleActionType
     setIsCreate: (isCreate: boolean) => void
 }
 
-export const Note: React.FC<PropsType> = ({note, status, handleAction, setIsCreate}) => {
+export const Note: React.FC<PropsType> = ({note, status, variants, handleAction, setIsCreate}) => {
     const [text, setText] = useState(note.text)
     const [caption, setCaption] = useState(note.caption)
     const creationDate = note.id.length ? 'Created: ' 
@@ -39,6 +41,11 @@ export const Note: React.FC<PropsType> = ({note, status, handleAction, setIsCrea
             ></Box></Link>
 
             <Box 
+                as={motion.div}
+                variants={variants}
+                initial={'hidden'}
+                animate={'visible'}
+                exit={'hidden'}
                 w='40%'
                 pos='absolute' 
                 top='24%' left='30%' 
