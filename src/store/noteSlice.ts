@@ -7,7 +7,8 @@ export type NoteType = {
 }
 
 export type NotesState = {
-    notes: NoteType[]
+    notes: NoteType[],
+    filteredNotes: NoteType[] | string
 }
 
 export enum StatusEnum {
@@ -16,7 +17,8 @@ export enum StatusEnum {
 }
 
 const initialState: NotesState = {
-    notes: []
+    notes: [],
+    filteredNotes: []
 }
 
 const noteSlice = createSlice({
@@ -41,10 +43,22 @@ const noteSlice = createSlice({
         },
         removeNote(state, action: PayloadAction<{id: string}>) {
             state.notes = state.notes.filter((note: NoteType) => note.id !== action.payload.id)
+        },
+        setFilteredNotes(state, action: PayloadAction<{searchTab: string}>) {
+            const filtered = state.notes
+            .filter((note: NoteType) => note.caption.toLowerCase()
+            .includes(action.payload.searchTab.toLowerCase())) 
+            
+            if(filtered.length) {
+                state.filteredNotes = filtered
+            }
+            else {
+                state.filteredNotes = 'Notes does not exist'
+            }
         }
     }
 })
 
-export const { addNote, editNote, removeNote } = noteSlice.actions
+export const { addNote, editNote, removeNote, setFilteredNotes } = noteSlice.actions
 
 export default noteSlice.reducer

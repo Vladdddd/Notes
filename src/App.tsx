@@ -22,7 +22,7 @@ function App() {
                 <Flex h='100vh'>
                     <Menu notes={notes} />
                     <Flex direction='column' w='full'>
-                        <Header />
+                        <Header notes={notes}/>
                         <Routes>
                             <Route
                                 path='*'

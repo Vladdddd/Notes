@@ -12,14 +12,21 @@ import {
 import storage from "redux-persist/lib/storage"
 import noteReducer from './noteSlice'
 
-const rootReducer = combineReducers({
-    notes: noteReducer,
-})
-
 const persistConfig = {
     key: 'root',
     storage,
+    blacklist: ['notes']
 }
+
+const notesPersistConfig = {
+    key: 'notes',
+    storage: storage,
+    blacklist: ['filteredNotes']
+}
+
+const rootReducer = combineReducers({
+    notes: persistReducer(notesPersistConfig, noteReducer),
+})
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
