@@ -26,7 +26,7 @@ export const Header: React.FC<PropsType> = ({notes}) => {
     }, [notes, searchTab, debouncedSearch])
 
     return (
-        <Flex mb={2} p={3} w='full' justify='center'>
+        <Flex mb={2} p={3} w='full' justify='center' bg='white'>
             <Box as='header' w='3xl'>
                 <Input 
                     h='12' 

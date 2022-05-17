@@ -19,7 +19,7 @@ function App() {
     return (
         <BrowserRouter>
             <ChakraProvider theme={theme}>
-                <Flex h='100vh'>
+                <Flex minH='100vh' h='100%' bg='gray.50'>
                     <Menu notes={notes} />
                     <Flex direction='column' w='full'>
                         <Header notes={notes}/>

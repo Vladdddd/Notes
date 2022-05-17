@@ -58,10 +58,9 @@ export const Content: React.FC<PropsType> = ({ notes }) => {
 
     return (
         <Box
-            as='main' p='8'
-            pl='20' pr='20'
-            w='full' h='full'
-            bg='gray.50'
+            as='main' pt='8'
+            pl='20' pr='20' pb='20'
+            w='100%'
         >
             <Flex justify='flex-start'>
                 <ButtonGroup

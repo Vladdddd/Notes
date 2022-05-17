@@ -11,7 +11,14 @@ export const Menu: React.FC<PropsType> = ({ notes }) => {
     const [isOpen, setIsOpen] = useState(false)
 
     return (
-        <Box pl='6' pr='6' bg='cyan.500' color='white' >
+        <Box 
+            pl='6' pr='6' 
+            bg='cyan.500' 
+            color='white' 
+            pos='sticky' 
+            top='0'
+            height='100vh'
+        >
             <IconButton
                 mb='8' mt='6'
                 aria-label='Hide Menu'
