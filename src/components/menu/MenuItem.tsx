@@ -6,6 +6,7 @@ interface PropsType {
     caption: string
     isOpen: boolean
     Icon: ComponentWithAs<"svg", IconProps>
+    path: string
 }
 
 const variants: any = {
@@ -27,7 +28,7 @@ const variants: any = {
     }
 }
 
-export const MenuItem: React.FC<PropsType> = ({ caption, isOpen, Icon }) => {
+export const MenuItem: React.FC<PropsType> = ({ caption, isOpen, Icon, path }) => {
 
     return (
             <Flex
@@ -35,8 +36,8 @@ export const MenuItem: React.FC<PropsType> = ({ caption, isOpen, Icon }) => {
                 color='white'
                 mb='3'
             >
-                <Link to='/'><IconButton
-                    aria-label='My Notes'
+                <Link to={path}><IconButton
+                    aria-label={caption}
                     bg='white'
                     size='md'
                     color='cyan.500'

@@ -3,9 +3,10 @@ import { Button, Textarea } from "@chakra-ui/react"
 import { motion } from "framer-motion"
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import { NoteType, StatusEnum } from "../../store/noteSlice"
-import { HandleActionType, VariantsType } from "./Content"
-import { RemoveButton } from "./RemoveButton"
+import { NoteType, StatusEnum } from "../../../store/noteSlice"
+import { HandleActionType } from "./Notes"
+import { RemoveButton } from "../buttons/RemoveButton"
+import { VariantsType } from "../Content"
 
 interface PropsType {
     note: NoteType
@@ -13,24 +14,25 @@ interface PropsType {
     variants: VariantsType
     handleAction: HandleActionType
     setIsCreate: (isCreate: boolean) => void
+    handleRemove: (id: string) => void
 }
 
-export const Note: React.FC<PropsType> = ({note, status, variants, handleAction, setIsCreate}) => {
+export const Note: React.FC<PropsType> = ({note, status, variants, handleAction, setIsCreate, handleRemove}) => {
     const [text, setText] = useState(note.text)
     const [caption, setCaption] = useState(note.caption)
     const creationDate = note.id.length ? 'Created: ' 
     + note.id.slice(0, 10) + ', ' 
     + note.id.slice(11, note.id.length-5) : ''
-
+    
     const onFocusText = (e: { target: { value: string } }) => {
         const value = e.target.value
         e.target.value = ''
         e.target.value = value
-    }
+    }    
 
     return (
         <Box>
-            <Link to='/'><Box 
+            <Link to='/notes'><Box 
                 w='full' h='full' 
                 pos='absolute' 
                 top='0' left='0'
@@ -62,7 +64,7 @@ export const Note: React.FC<PropsType> = ({note, status, variants, handleAction,
                     fontSize='21px'
                     value={caption}
                     onChange={(e) => setCaption(e.target.value)}/>
-                <Link to='/'><RemoveButton id={note.id}/></Link>
+                <Link to='/notes'><RemoveButton id={note.id} removeMethod={handleRemove}/></Link>
                 <Textarea 
                     color='black'
                     minH='48' 
@@ -90,7 +92,7 @@ export const Note: React.FC<PropsType> = ({note, status, variants, handleAction,
                     <Text align='center' ml='2' color='gray.800' fontSize='13px'>
                         {creationDate}
                     </Text>
-                    <Link to='/'><Button 
+                    <Link to='/notes'><Button 
                         fontSize='15px'
                         border='0'
                         _focus={{}} 

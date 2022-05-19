@@ -1,14 +1,12 @@
 import { DeleteIcon } from "@chakra-ui/icons"
 import { IconButton } from "@chakra-ui/react"
-import { useAppDispatch } from "../../hooks/redux"
-import { removeNote } from "../../store/noteSlice"
 
 interface PropsType {
     id: string
+    removeMethod: (value: any) => void
 }
 
-export const RemoveButton: React.FC<PropsType> = ({ id }) => {
-    const dispatch = useAppDispatch()
+export const RemoveButton: React.FC<PropsType> = ({ id, removeMethod }) => {
     return (
         <IconButton
             size='md'
@@ -20,7 +18,7 @@ export const RemoveButton: React.FC<PropsType> = ({ id }) => {
             zIndex='99'
             icon={<DeleteIcon />}
             _focus={{}}
-            onClick={() => dispatch(removeNote({ id }))}
+            onClick={() => removeMethod(id)}
         />
     )
 }

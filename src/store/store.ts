@@ -10,6 +10,7 @@ import {
     REGISTER,
 } from "redux-persist"
 import storage from "redux-persist/lib/storage"
+import folderSlice from "./folderSlice"
 import noteReducer from './noteSlice'
 
 const persistConfig = {
@@ -21,11 +22,12 @@ const persistConfig = {
 const notesPersistConfig = {
     key: 'notes',
     storage: storage,
-    blacklist: ['filteredNotes']
+    blacklist: ['filteredNotes', 'folderNotes']
 }
 
 const rootReducer = combineReducers({
     notes: persistReducer(notesPersistConfig, noteReducer),
+    folders: folderSlice
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

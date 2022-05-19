@@ -1,17 +1,19 @@
 import { Box } from "@chakra-ui/layout"
 import { Text } from "@chakra-ui/react"
 import { Link } from "react-router-dom"
-import { NoteType } from "../../store/noteSlice"
-import { RemoveButton } from "./RemoveButton"
+import { NoteType } from "../../../store/noteSlice"
+import { RemoveButton } from "../buttons/RemoveButton"
 import { motion } from "framer-motion"
-import { VariantsType } from "./Content"
+import { VariantsType } from "../Content"
 
 interface PropsType {
     note: NoteType
     variants: VariantsType
+    handleRemove: (id: string) => void 
 }
 
-export const Icon: React.FC<PropsType> = ({ note, variants }) => {
+export const Icon: React.FC<PropsType> = ({ note, variants, handleRemove }) => {
+    
     return (
         <Box 
             as={motion.div}
@@ -43,7 +45,7 @@ export const Icon: React.FC<PropsType> = ({ note, variants }) => {
                     overflow='hidden'
                 >{note.text}</Text>
             </Box></Link>
-            <RemoveButton id={note.id}/>
+            <RemoveButton id={note.id} removeMethod={handleRemove}/>
         </Box>
     )
 }

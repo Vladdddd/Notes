@@ -30,9 +30,9 @@ export const Menu: React.FC<PropsType> = ({ notes }) => {
                 onClick={() => { setIsOpen(!isOpen) }}
             />
 
-            <MenuItem caption='All notes' isOpen={isOpen} Icon={EmailIcon}/>
-            <MenuItem caption='Folders' isOpen={isOpen} Icon={AttachmentIcon}/>
-            <MenuItem caption='Favorite notes' isOpen={isOpen} Icon={CheckCircleIcon}/>
+            <MenuItem caption='All notes' isOpen={isOpen} Icon={EmailIcon} path={'/notes'}/>
+            <MenuItem caption='Folders' isOpen={isOpen} Icon={AttachmentIcon} path={'/folders'}/>
+            <MenuItem caption='Favorite notes' isOpen={isOpen} Icon={CheckCircleIcon} path={'/'}/>
         </Box>
     )
 }

@@ -3,12 +3,14 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export type NoteType = {
     id: string
     caption: string
-    text: string
+    text: string,
+    folder?: string
 }
 
 export type NotesState = {
     notes: NoteType[],
     filteredNotes: NoteType[] | string
+    folderNotes: NoteType[]
 }
 
 export enum StatusEnum {
@@ -18,18 +20,20 @@ export enum StatusEnum {
 
 const initialState: NotesState = {
     notes: [],
-    filteredNotes: []
+    filteredNotes: [],
+    folderNotes: []
 }
 
 const noteSlice = createSlice({
     name: 'notes',
     initialState,
     reducers: {
-        addNote(state, action: PayloadAction<{text: string, caption: string}>) {
+        addNote(state, action: PayloadAction<{text: string, caption: string}>) {  
             state.notes.push({
                 id: new Date().toISOString(),
                 text: action.payload.text,
-                caption: action.payload.caption
+                caption: action.payload.caption,
+                folder: ''
             })
         },
         editNote(state, action: PayloadAction<{id: string, text: string, caption: string}>) {
@@ -53,8 +57,11 @@ const noteSlice = createSlice({
                 state.filteredNotes = filtered
             }
             else {
-                state.filteredNotes = 'Notes does not exist'
+                state.filteredNotes = 'Notes did not exist'
             }
+        },
+        setFolderNotes(state, action: PayloadAction<{name: string}>) {
+            state.folderNotes = state.notes.filter((note: NoteType) => note.folder !== action.payload.name)
         }
     }
 })
