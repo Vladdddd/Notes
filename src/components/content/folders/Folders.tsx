@@ -1,33 +1,34 @@
-import { Flex, Text } from "@chakra-ui/layout"
-import { useAppDispatch, useAppSelector } from "../../../hooks/redux"
-import { addFolder } from "../../../store/folderSlice"
-import { AddButton } from "../buttons/AddButton"
+import { Route, Routes } from "react-router-dom"
+import { FolderType } from "../../../store/folderSlice"
+import { NoteType } from "../../../store/noteSlice"
 import { VariantsType } from "../Content"
 import { Folder } from "./Folder"
 
 interface PropsType {
+    notes: NoteType[]
+    folders: FolderType[]
     variants: VariantsType
+    searchTab: string
 }
 
-export const Folders: React.FC<PropsType> = ({ variants }) => {
-    const dispatch = useAppDispatch()
-    const folders = useAppSelector(state => state.folders.folders)
-
-    const handleSubmit = () => {
-        dispatch(addFolder({title: 'New Folder'}))
-    }
+export const Folders: React.FC<PropsType> = ({ notes, folders, variants, searchTab }) => {
 
     return (
-        <>
-            <AddButton text={"Add Folder"} addMethod={handleSubmit} />
-            {!folders.length && <Text>Folders did not exist</Text>}
-            <Flex justifyContent='flex-start' flexWrap='wrap' mt='5' gap='8'>
-                {
-                    folders.map((folder) => {
-                        return <Folder variants={variants} folder={folder} key={folder.id}/>
-                    })
-                }
-            </Flex>
-        </>
+        <Routes>
+            {folders.map((folder) => (
+                <Route
+                    path={folder.id + '/*'}
+                    key={folder.id}
+                    element={<Folder
+                        notes={notes}
+                        searchTab={searchTab}
+                        folders={folders}
+                        folder={folder}
+                        variants={variants}
+                    />}>
+                </Route>
+            ))}
+        </Routes>
     )
 }
+

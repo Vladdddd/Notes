@@ -22,7 +22,7 @@ const persistConfig = {
 const notesPersistConfig = {
     key: 'notes',
     storage: storage,
-    blacklist: ['filteredNotes', 'folderNotes']
+    blacklist: ['filteredNotes', 'folderNotes', 'searchTab']
 }
 
 const rootReducer = combineReducers({

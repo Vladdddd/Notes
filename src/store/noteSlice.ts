@@ -4,13 +4,14 @@ export type NoteType = {
     id: string
     caption: string
     text: string,
-    folder?: string
+    folder?: string | string[]
 }
 
 export type NotesState = {
     notes: NoteType[],
     filteredNotes: NoteType[] | string
     folderNotes: NoteType[]
+    searchTab: string
 }
 
 export enum StatusEnum {
@@ -21,7 +22,8 @@ export enum StatusEnum {
 const initialState: NotesState = {
     notes: [],
     filteredNotes: [],
-    folderNotes: []
+    folderNotes: [],
+    searchTab: ''
 }
 
 const noteSlice = createSlice({
@@ -49,9 +51,12 @@ const noteSlice = createSlice({
             state.notes = state.notes.filter((note: NoteType) => note.id !== action.payload.id)
         },
         setFilteredNotes(state, action: PayloadAction<{searchTab: string}>) {
-            const filtered = state.notes
-            .filter((note: NoteType) => note.caption.toLowerCase()
-            .includes(action.payload.searchTab.toLowerCase())) 
+            let filtered: NoteType[] = []
+            if(action.payload.searchTab) { 
+                filtered = state.notes
+                .filter((note: NoteType) => note.caption.toLowerCase()
+                .includes(action.payload.searchTab.toLowerCase())) 
+            }
             
             if(filtered.length) {
                 state.filteredNotes = filtered
@@ -60,12 +65,29 @@ const noteSlice = createSlice({
                 state.filteredNotes = 'Notes did not exist'
             }
         },
+        editFolderForNote(state, action: PayloadAction<{id: string, folder: string | string[]}>) {
+            const payload = action.payload
+            const index = state.notes.findIndex((note: NoteType) => note.id === payload.id)
+            if(index !== -1) {
+                state.notes[index].folder = payload.folder
+            }
+        },
         setFolderNotes(state, action: PayloadAction<{name: string}>) {
-            state.folderNotes = state.notes.filter((note: NoteType) => note.folder !== action.payload.name)
-        }
+            state.folderNotes = state.notes.filter((note: NoteType) => note.folder === action.payload.name)
+        },
+        setSearchTab(state, action: PayloadAction<{term: string}>) {
+            state.searchTab = action.payload.term
+        },
     }
 })
 
-export const { addNote, editNote, removeNote, setFilteredNotes } = noteSlice.actions
+export const { addNote, 
+    editNote, 
+    removeNote, 
+    setFilteredNotes, 
+    editFolderForNote, 
+    setFolderNotes,
+    setSearchTab 
+} = noteSlice.actions
 
 export default noteSlice.reducer

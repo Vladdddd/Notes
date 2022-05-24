@@ -1,16 +1,16 @@
 import { Box, Flex, Input } from "@chakra-ui/react"
 import { useAppDispatch } from "../../hooks/redux"
-import { NoteType, setFilteredNotes } from "../../store/noteSlice"
+import { NoteType, setFilteredNotes, setSearchTab } from "../../store/noteSlice"
 import {debounce} from 'lodash'
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 
 interface PropsType {
     notes: NoteType[]
+    searchTab: string
 }
 
-export const Header: React.FC<PropsType> = ({notes}) => {
+export const Header: React.FC<PropsType> = ({notes, searchTab}) => {
     const dispatch = useAppDispatch()
-    const [searchTab, setTab] = useState('')
 
     const debouncedSearch = useRef(
         debounce((searchTab) => {
@@ -34,7 +34,7 @@ export const Header: React.FC<PropsType> = ({notes}) => {
                     placeholder='Search your note' 
                     _focus={{}}
                     value={searchTab}
-                    onChange={(e) => setTab(e.target.value)}
+                    onChange={(e) => dispatch(setSearchTab({term: e.target.value}))}
                     />
             </Box>
         </Flex>

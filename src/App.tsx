@@ -15,6 +15,7 @@ const theme = extendTheme({
 
 function App() {
     const notes = useAppSelector(state => state.notes.notes)
+    const searchTab = useAppSelector(state => state.notes.searchTab)
 
     return (
         <BrowserRouter>
@@ -22,11 +23,11 @@ function App() {
                 <Flex minH='100vh' h='100%' bg='gray.50'>
                     <Menu notes={notes} />
                     <Flex direction='column' w='full'>
-                        <Header notes={notes}/>
+                        <Header notes={notes} searchTab={searchTab}/>
                         <Routes>
                             <Route
                                 path='*'
-                                element={<Content notes={notes} />}>
+                                element={<Content notes={notes} searchTab={searchTab}/>}>
                             </Route>
                         </Routes>
                     </Flex>

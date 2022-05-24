@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from "@chakra-ui/layout"
+import { Box, Flex } from "@chakra-ui/layout"
 import { Route, Routes } from "react-router"
 import { addNote, editNote, NoteType, removeNote, StatusEnum } from "../../../store/noteSlice"
 import { Note } from "./Note"
@@ -7,32 +7,33 @@ import { useLocation } from "react-router-dom"
 import { AnimatePresence } from "framer-motion"
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux"
 import { useEffect, useState } from "react"
-import { AddButton } from "../buttons/AddButton"
 import { VariantsType } from "../Content"
+import { FolderType } from "../../../store/folderSlice"
+import { CreateNewNote } from "./CreateNewNote"
 
-const initialNote = {
-    id: '',
-    text: '',
-    caption: ''
-}
+
 
 export type HandleActionType = (
     id: string,
     text: string,
     caption: string,
-    status: StatusEnum) => void
+    status: StatusEnum
+) => void
 
 interface PropsType {
     notes: NoteType[]
-    variants: VariantsType    
+    variants: VariantsType
+    folders: FolderType[]
+    searchTab: string
 }
 
-export const Notes: React.FC<PropsType> = ({ notes, variants }) => {
+export const Notes: React.FC<PropsType> = ({ folders, notes, variants, searchTab }) => {
     const location = useLocation();
-    const filtered = useAppSelector(state => state.notes.filteredNotes)
-    const isString = typeof filtered === 'string'
-    const [filteredNotes, setNotes] = useState(notes)
 
+    const filtered = useAppSelector(searchTab ? state => state.notes.filteredNotes : () => ([]))
+    const isString = typeof filtered === 'string'
+
+    const [filteredNotes, setNotes] = useState(notes)
     const [isCreate, setIsCreate] = useState(false)
     const dispatch = useAppDispatch()
 
@@ -56,26 +57,50 @@ export const Notes: React.FC<PropsType> = ({ notes, variants }) => {
     }
 
     const handleRemove = (id: string) => {
-        dispatch(removeNote({id}))
+        dispatch(removeNote({ id }))
     }
 
     useEffect(() => {
-        if (!isString) {
+        if (!isString && filtered.length) {
             setNotes(filtered)
         }
     }, [filtered, isString])
 
+    useEffect(() => {
+        setNotes(notes)
+    }, [notes]) 
+
     if (isString) {
-        return <Text>{filtered}</Text>
+        return (
+            <> 
+                <CreateNewNote 
+                    variants={variants}
+                    isCreate={isCreate}
+                    isExist={isString}
+                    handleSubmit={handleSubmit}
+                    handleAction={handleAction}
+                    handleRemove={handleRemove}
+                    setIsCreate={setIsCreate}
+                />
+            </>
+        )
     }
 
     return (
         <>
-            <AddButton addMethod={handleSubmit} text={'Add Note'} />
+            <CreateNewNote 
+                    variants={variants}
+                    isCreate={isCreate}
+                    isExist={!filteredNotes.length ? true : false}
+                    handleSubmit={handleSubmit}
+                    handleAction={handleAction}
+                    handleRemove={handleRemove}
+                    setIsCreate={setIsCreate}
+            />
             <Flex justifyContent='flex-start' flexWrap='wrap' mt='5' gap='8'>
                 {filteredNotes.map((note: NoteType) => (
                     <Box w='31%' h='40' key={note.id}>
-                        <Icon note={note} variants={variants} handleRemove={handleRemove}/>
+                        <Icon folders={folders} note={note} variants={variants} handleRemove={handleRemove} />
                         <AnimatePresence exitBeforeEnter>
                             <Routes location={location} key={location.pathname}>
                                 <Route
@@ -94,16 +119,6 @@ export const Notes: React.FC<PropsType> = ({ notes, variants }) => {
                     </Box>
                 ))}
             </Flex>
-            {isCreate &&
-                <AnimatePresence exitBeforeEnter><Note
-                    variants={variants}
-                    note={initialNote}
-                    status={StatusEnum.Add}
-                    handleAction={handleAction}
-                    setIsCreate={setIsCreate}
-                    handleRemove={handleRemove}
-                /></AnimatePresence>
-            }
         </>
     )
 }
