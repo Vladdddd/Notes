@@ -10,17 +10,16 @@ interface PropsType {
   notes: NoteType[]
   groups: GroupType[]
   variants: VariantsType
-  searchTab: string
 }
 
-const Groups: React.FC<PropsType> = ({ notes, groups, variants, searchTab }) => {
+const Groups: React.FC<PropsType> = ({ notes, groups, variants }) => {
   return (
     <Routes>
       {groups.map((group) => (
         <Route
           path={group.id + '/*'}
           key={group.id}
-          element={<Group notes={notes} searchTab={searchTab} groups={groups} group={group} variants={variants} />}
+          element={<Group notes={notes} groups={groups} group={group} variants={variants} />}
         ></Route>
       ))}
     </Routes>

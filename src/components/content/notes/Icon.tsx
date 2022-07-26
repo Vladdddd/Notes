@@ -1,11 +1,11 @@
 import { Box } from '@chakra-ui/layout'
-import { Button, Menu, MenuButton, MenuItemOption, MenuList, MenuOptionGroup, Text } from '@chakra-ui/react'
+import { Button, IconButton, Menu, MenuButton, MenuItemOption, MenuList, MenuOptionGroup, Text } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { UpDownIcon } from '@chakra-ui/icons'
+import { StarIcon, UpDownIcon } from '@chakra-ui/icons'
 import { useEffect, useState } from 'react'
 
-import { editGroupId, NoteType } from '../../../store/noteSlice'
+import { editFavorite, editGroupId, NoteType } from '../../../store/noteSlice'
 import { useAppDispatch } from '../../../hooks/redux'
 import { GroupType } from '../../../store/groupSlice'
 import { RemoveButton } from '../buttons/RemoveButton'
@@ -27,7 +27,6 @@ export const Icon: React.FC<PropsType> = ({ groups, note, variants, handleRemove
   const dispatch = useAppDispatch()
   const [group, setGroup] = useState(emptyGroup)
   const findedGroup = note.groupId ? groups.find((group: GroupType) => group.id === note.groupId) : emptyGroup
-  //useMemo
 
   useEffect(() => {
     setGroup(findedGroup!)
@@ -35,6 +34,10 @@ export const Icon: React.FC<PropsType> = ({ groups, note, variants, handleRemove
 
   const handleChange = (value: string | string[]) => {
     dispatch(editGroupId({ id: note.id, groupId: value }))
+  }
+
+  const setFavorite = (value: boolean) => {
+    dispatch(editFavorite({ id: note.id, isFavorite: value }))
   }
 
   return (
@@ -90,6 +93,16 @@ export const Icon: React.FC<PropsType> = ({ groups, note, variants, handleRemove
             </MenuOptionGroup>
           </MenuList>
         </Menu>
+        <IconButton
+          ml="2"
+          icon={<StarIcon />}
+          aria-label="Set Favorite"
+          onClick={() => setFavorite(!note.isFavorite)}
+          color={note.isFavorite ? 'gold' : 'white'}
+          background="#080721"
+          _focus={{}}
+          _hover={{}}
+        />
       </Box>
     </Box>
   )

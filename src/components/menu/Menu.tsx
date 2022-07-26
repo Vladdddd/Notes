@@ -1,16 +1,12 @@
 import { IconButton, Box } from '@chakra-ui/react'
-import { AttachmentIcon, CheckCircleIcon, EmailIcon, HamburgerIcon } from '@chakra-ui/icons'
+import { AttachmentIcon, StarIcon, EmailIcon, HamburgerIcon, ChatIcon } from '@chakra-ui/icons'
 import { useState } from 'react'
-
-import { NoteType } from '../../store/noteSlice'
 
 import { MenuItem } from './MenuItem'
 
-interface PropsType {
-  notes: NoteType[]
-}
+interface PropsType {}
 
-export const Menu: React.FC<PropsType> = ({ notes }) => {
+export const Menu: React.FC<PropsType> = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -31,13 +27,15 @@ export const Menu: React.FC<PropsType> = ({ notes }) => {
       />
       <Box
         display={['flex', 'block']}
-        justifyContent="space-between"
+        justifyContent="space-around"
+        p={['2', '0']}
         pt={['3', '0']}
         pb={['3', '0']}
       >
+        <MenuItem caption="Welcome page" isOpen={isOpen} Icon={ChatIcon} path={'/'} />
         <MenuItem caption="All notes" isOpen={isOpen} Icon={EmailIcon} path={'/notes'} />
         <MenuItem caption="Folders" isOpen={isOpen} Icon={AttachmentIcon} path={'/groups'} />
-        <MenuItem caption="Favorite notes" isOpen={isOpen} Icon={CheckCircleIcon} path={'/'} />
+        <MenuItem caption="Favorite notes" isOpen={isOpen} Icon={StarIcon} path={'/favorites'} />
       </Box>
     </Box>
   )

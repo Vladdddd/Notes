@@ -9,7 +9,7 @@ import { NoteType, StatusEnum } from '../../../store/noteSlice'
 import { RemoveButton } from '../buttons/RemoveButton'
 import { VariantsType } from '../Content'
 
-import { HandleActionType } from './Notes'
+import { HandleActionType } from './NotesList'
 
 interface PropsType {
   note: NoteType
@@ -37,6 +37,7 @@ export const Note: React.FC<PropsType> = ({
   const creationDate = note.id.length
     ? 'Created: ' + note.id.slice(0, 10) + ', ' + note.id.slice(11, note.id.length - 5)
     : ''
+  const isFavorite = path === '/favorites' ? true : false
 
   const onFocusText = (e: { target: { value: string } }) => {
     const value = e.target.value
@@ -122,7 +123,7 @@ export const Note: React.FC<PropsType> = ({
               fontSize="15px"
               border="0"
               _focus={{}}
-              onClick={() => handleAction(note.id, text, caption, status, groupId ? groupId : '')}
+              onClick={() => handleAction(note.id, text, caption, status, isFavorite, groupId ? groupId : '')}
             >
               Submit
             </Button>

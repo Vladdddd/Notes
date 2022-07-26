@@ -3,9 +3,11 @@ import { Box } from '@chakra-ui/react'
 import { lazy, Suspense } from 'react'
 
 import { NoteType } from '../../store/noteSlice'
-import { useAppSelector } from '../../hooks/redux'
+import { GroupType } from '../../store/groupSlice'
 
-const Notes = lazy(() => import('./notes/Notes'))
+import FavNotes from './notes/pages/FavNotes'
+
+const AllNotes = lazy(() => import('./notes/pages/AllNotes'))
 const Groups = lazy(() => import('./groups/Groups'))
 const GroupIcons = lazy(() => import('./groups/GroupIcons'))
 
@@ -25,21 +27,22 @@ export type VariantsType = typeof variants
 interface PropsType {
   notes: NoteType[]
   searchTab: string
+  groups: GroupType[]
 }
 
-export const Content: React.FC<PropsType> = ({ notes, searchTab }) => {
-  const groups = useAppSelector((state) => state.groups.groups)
+export const Content: React.FC<PropsType> = ({ notes, searchTab, groups }) => {
   return (
     <Box as="main" w="100%" pt="8" pl={['0', '20']} pr={['0', '20']} pb="24">
       <Suspense fallback={<div>loading...</div>}>
         <Routes>
           <Route
             path="/notes/*"
-            element={<Notes searchTab={searchTab} groups={groups} notes={notes} variants={variants} />}
+            element={<AllNotes searchTab={searchTab} groups={groups} notes={notes} variants={variants} />}
           ></Route>
           <Route path="/groups/*" element={<GroupIcons groups={groups} variants={variants} />}></Route>
+          <Route path="/favorites/*" element={<FavNotes notes={notes} groups={groups} variants={variants} />}></Route>
         </Routes>
-        <Groups notes={notes} groups={groups} variants={variants} searchTab={searchTab} />
+        <Groups notes={notes} groups={groups} variants={variants} />
       </Suspense>
     </Box>
   )

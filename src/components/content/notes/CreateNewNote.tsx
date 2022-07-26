@@ -4,7 +4,7 @@ import { StatusEnum } from '../../../store/noteSlice'
 import { AddButton } from '../buttons/AddButton'
 import { VariantsType } from '../Content'
 
-import { HandleActionType } from './Notes'
+import { HandleActionType } from './NotesList'
 import { Note } from './Note'
 
 const initialNote = {
@@ -12,9 +12,11 @@ const initialNote = {
   text: '',
   caption: '',
   groupId: '',
+  isFavorite: false,
 }
 
 interface PropsType {
+  path: string
   variants: VariantsType
   isCreate: boolean
   groupId: string
@@ -25,6 +27,7 @@ interface PropsType {
 }
 
 export const CreateNewNote: React.FC<PropsType> = ({
+  path,
   variants,
   isCreate,
   groupId,
@@ -38,7 +41,7 @@ export const CreateNewNote: React.FC<PropsType> = ({
       {isCreate && (
         <AnimatePresence exitBeforeEnter>
           <Note
-            path={groupId ? '/' + groupId : '/notes'}
+            path={path}
             variants={variants}
             note={initialNote}
             groupId={groupId ? groupId : ''}
