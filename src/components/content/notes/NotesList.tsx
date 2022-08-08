@@ -77,8 +77,8 @@ export const NotesList: React.FC<PropsType> = ({ caption, path, notes, groups, v
       <Flex w="100%" flexWrap="wrap" mt="5" justify={['center', 'start', 'start']}>
         {notes.length
           ? notes.map((note: NoteType) => (
-            <Box w={['85%', '45%', '30.3%']} mb="3%" mr="3%" h="40" key={note.id}>
-              <Icon groups={groups} note={note} variants={variants} handleRemove={handleRemove} />
+            <Box w={['85%', '45%', '30.3%']} mb="3%" mr="3%" h="56" key={note.id}>
+              <Icon groups={groups} note={note} variants={variants} handleRemove={handleRemove}/>
               <AnimatePresence exitBeforeEnter>
                 <Routes location={location} key={location.pathname}>
                   <Route

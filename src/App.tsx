@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import { Content } from './components/content/Content'
 import { Header } from './components/header/Header'
-import { Menu } from './components/menu/Menu'
+import Menu from './components/menu/Menu'
 import { useAppSelector } from './hooks/redux'
 import '@fontsource/inter/700.css'
 import { Welcome } from './pages/Welcome'

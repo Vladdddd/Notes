@@ -16,12 +16,12 @@ interface PropsType {
 }
 
 const emptyArray: NoteType[] = []
+const caption = 'All Notes'
+const path = '/notes'
 
 const AllNotes: React.FC<PropsType> = ({ groups, notes, variants, searchTab, groupId }) => {
   const filteredNotes = useAppSelector(searchTab ? (state) => state.notes.filteredNotes : () => emptyArray)
-  const [componentNotes, setNotes] = useState(notes)
-  const caption = 'All Notes'
-  const path = '/notes'
+  const [componentNotes, setNotes] = useState(() => notes)
 
   useEffect(() => {
     if (!!searchTab) {
@@ -35,7 +35,7 @@ const AllNotes: React.FC<PropsType> = ({ groups, notes, variants, searchTab, gro
   useEffect(() => {
     setNotes(notes)
   }, [notes])
-
+  
   return (
     <NotesList
       caption={caption}

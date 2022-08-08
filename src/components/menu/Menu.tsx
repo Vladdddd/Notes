@@ -1,12 +1,12 @@
 import { IconButton, Box } from '@chakra-ui/react'
 import { AttachmentIcon, StarIcon, EmailIcon, HamburgerIcon, ChatIcon } from '@chakra-ui/icons'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 
 import { MenuItem } from './MenuItem'
 
 interface PropsType {}
 
-export const Menu: React.FC<PropsType> = () => {
+const Menu: React.FC<PropsType> = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -34,9 +34,11 @@ export const Menu: React.FC<PropsType> = () => {
       >
         <MenuItem caption="Welcome page" isOpen={isOpen} Icon={ChatIcon} path={'/'} />
         <MenuItem caption="All notes" isOpen={isOpen} Icon={EmailIcon} path={'/notes'} />
-        <MenuItem caption="Folders" isOpen={isOpen} Icon={AttachmentIcon} path={'/groups'} />
+        <MenuItem caption="Groups" isOpen={isOpen} Icon={AttachmentIcon} path={'/groups'} />
         <MenuItem caption="Favorite notes" isOpen={isOpen} Icon={StarIcon} path={'/favorites'} />
       </Box>
     </Box>
   )
 }
+
+export default memo(Menu)

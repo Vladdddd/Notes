@@ -8,7 +8,7 @@ interface PropsType {
 
 export const AddButton: React.FC<PropsType> = ({ text, addMethod }) => {
   return (
-    <Flex justify="flex-start" mr="3%">
+    <Flex justify="flex-start" mr={['6', '10']}>
       <ButtonGroup w="32" isAttached>
         <IconButton
           bg="#080721"

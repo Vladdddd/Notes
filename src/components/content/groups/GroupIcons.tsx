@@ -40,7 +40,7 @@ const GroupIcons: React.FC<PropsType> = ({ groups, variants }) => {
                 </Text>
                 <AddButton text={'Add Group'} addMethod={handleSubmit} />
               </Flex>
-              {!groups.length ? <Text>Groups did not exist</Text> : ''}
+              {!groups.length ? <Text>Groups do not exist</Text> : ''}
               <Flex justifyContent={['center', 'flex-start' ,'flex-start']} flexWrap="wrap" mt="5" gap="8">
                 {groups.map((group) => (
                   <GroupIcon group={group} variants={variants} key={group.id} />

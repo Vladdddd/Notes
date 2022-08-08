@@ -66,17 +66,17 @@ export const Note: React.FC<PropsType> = ({
         initial={'hidden'}
         animate={'visible'}
         exit={'hidden'}
-        w={['85%', '40%']}
+        w={['85%', '45%']}
         pos="absolute"
-        top={['10%', '24%']}
-        left={['7.5%', '30%']}
+        top={['10vh', '24vh']}
+        left={['7.5%', '25%']}
         borderTopRadius="8"
         bg="white"
         zIndex="100"
       >
         <Textarea
           color="black"
-          minH="12"
+          minH="14"
           mt="2"
           pb="0"
           border="0"
@@ -92,7 +92,7 @@ export const Note: React.FC<PropsType> = ({
         </Link>
         <Textarea
           color="black"
-          minH="48"
+          minH="60"
           mb="2"
           pt="0"
           border="0"
@@ -107,7 +107,7 @@ export const Note: React.FC<PropsType> = ({
           onFocus={onFocusText}
         />
         <Flex
-          width="full"
+          width="100%"
           justify="space-between"
           align="center"
           pos="absolute"

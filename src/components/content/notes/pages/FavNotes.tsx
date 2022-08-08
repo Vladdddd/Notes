@@ -11,10 +11,11 @@ interface PropsType {
   groupId?: string
 }
 
+const caption = 'Favorites'
+const path = '/favorites'
+
 const FavNotes: React.FC<PropsType> = ({ notes, groups, variants, groupId }) => {
   const componentNotes = notes.filter((note: NoteType) => note.isFavorite === true)
-  const caption = 'Favorites'
-  const path = '/favorites'
 
   return (
     <NotesList

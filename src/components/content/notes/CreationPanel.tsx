@@ -34,7 +34,7 @@ export const CreationPanel: React.FC<PropsType> = ({
   if (!notes.length) {
     return (
       <>
-        <Flex fontFamily="Inter" justify="space-between" mb="8" fontWeight="500">
+        <Flex fontFamily="Inter" justify="space-between" mb="10" fontWeight="500">
           <Text fontSize={['20px', '32px']} lineHeight="10" pl={['6', '0', '0']}>
             {caption}
           </Text>
@@ -49,7 +49,7 @@ export const CreationPanel: React.FC<PropsType> = ({
             setIsCreate={setIsCreate}
           />
         </Flex>
-        <Text>Notes did not exist</Text>
+        <Text>Notes do not exist</Text>
       </>
     )
   }
