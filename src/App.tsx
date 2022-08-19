@@ -14,7 +14,7 @@ const theme = extendTheme({
     body: 'Segoe UI, sans-serif',
   },
 })
-
+//#F6F7F9
 function App() {
   const notes = useAppSelector((state) => state.notes.notes)
   const groups = useAppSelector((state) => state.groups.groups)
@@ -23,9 +23,9 @@ function App() {
   return (
     <BrowserRouter>
       <ChakraProvider theme={theme}>
-        <Flex minH="100vh" h="100%" w="100%" bg="gray.50" direction={['column', 'row']}>
+        <Flex minH="100vh" h="100%" w="100%" bg="#F1F4F9" direction={['column', 'row']}>
           <Menu />
-          <Flex direction="column" w="100%" bg="gray.50">
+          <Flex direction="column" w="100%" bg="#F1F4F9">
             <Header notes={notes} searchTab={searchTab} />
             <Routes>
               <Route path="/" element={<Welcome notesLength={notes.length} groupsLength={groups.length}/>}></Route>

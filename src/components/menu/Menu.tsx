@@ -7,35 +7,30 @@ import { MenuItem } from './MenuItem'
 interface PropsType {}
 
 const Menu: React.FC<PropsType> = () => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(true)
 
   return (
-    <Box pl="5" pr="5" bg="#080721" color="white" pos={['initial', 'sticky']} top="0" height={['1%', '100vh']}>
+    <Box pl={['0', '5']} pr={['0', '5']} bg="white" pos={['initial', 'sticky']} top="0" height={['1%', '100vh']}>
       <IconButton
+        aria-label="Hide Menu"
         display={['none', 'block']}
+        bg="white"
         mb="8"
         mt="6"
-        aria-label="Hide Menu"
-        bg="white"
         width="8"
-        color="#080721"
+        color="#90A3BF"
         _focus={{}}
         icon={<HamburgerIcon />}
         onClick={() => {
           setIsOpen(!isOpen)
         }}
       />
-      <Box
-        display={['flex', 'block']}
-        justifyContent="space-around"
-        p={['2', '0']}
-        pt={['3', '0']}
-        pb={['3', '0']}
-      >
-        <MenuItem caption="Welcome page" isOpen={isOpen} Icon={ChatIcon} path={'/'} />
-        <MenuItem caption="All notes" isOpen={isOpen} Icon={EmailIcon} path={'/notes'} />
+
+      <Box display={['flex', 'block']} justifyContent="space-around" pt={['3', '0']} pb={['3', '0']}>
+        <MenuItem caption="Home" isOpen={isOpen} Icon={ChatIcon} path={'/'} />
+        <MenuItem caption="Notes" isOpen={isOpen} Icon={EmailIcon} path={'/notes'} />
         <MenuItem caption="Groups" isOpen={isOpen} Icon={AttachmentIcon} path={'/groups'} />
-        <MenuItem caption="Favorite notes" isOpen={isOpen} Icon={StarIcon} path={'/favorites'} />
+        <MenuItem caption="Favorites" isOpen={isOpen} Icon={StarIcon} path={'/favorites'} />
       </Box>
     </Box>
   )

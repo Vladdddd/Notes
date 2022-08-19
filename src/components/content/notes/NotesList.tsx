@@ -59,7 +59,7 @@ export const NotesList: React.FC<PropsType> = ({ caption, path, notes, groups, v
   const handleRemove = (id: string) => {
     dispatch(removeNote({ id }))
   }
-
+  
   return (
     <Box w="100%">
       <CreationPanel
@@ -74,10 +74,23 @@ export const NotesList: React.FC<PropsType> = ({ caption, path, notes, groups, v
         handleAction={handleAction}
         handleRemove={handleRemove}
       />
-      <Flex w="100%" flexWrap="wrap" mt="5" justify={['center', 'start', 'start']}>
+      <Flex 
+        w="100%" 
+        overflow="hidden"
+        flexWrap="wrap"
+        mt="5" 
+        gap="3.5%"
+        justify={['center', 'flex-start', 'flex-start']}
+      >
         {notes.length
           ? notes.map((note: NoteType) => (
-            <Box w={['85%', '45%', '30.3%']} mb="3%" mr="3%" h="56" key={note.id}>
+            <Box 
+              w={['85%', '100%', '48.25%', '48.25%', '31%']}
+              p="0%" 
+              mb="3.5%"
+              h="52" 
+              key={note.id}
+            >
               <Icon groups={groups} note={note} variants={variants} handleRemove={handleRemove}/>
               <AnimatePresence exitBeforeEnter>
                 <Routes location={location} key={location.pathname}>

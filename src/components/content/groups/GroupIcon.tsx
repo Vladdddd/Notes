@@ -32,26 +32,22 @@ export const GroupIcon: React.FC<PropsType> = ({ group, variants }) => {
 
   return (
     <>
-      <Box w={['85%', '20%', '20%']} h="28" pos="relative" border="1px solid #CBD5E0" borderRadius="12">
-        <Link to={'/' + group.id}>
-          <Box w="full" h="full" pos="absolute" zIndex="1"></Box>
-        </Link>
-
+      <Box w={['85%', '20%', '20%']} h="28" pos="relative" bg="white" borderRadius="12">
         <Box
           as={motion.div}
           variants={variants}
           initial={'hidden'}
           animate={'visible'}
           exit={'hidden'}
-          w="full"
-          h="max-content"
+          w="100%"
+          h="100%"
           pos="relative"
           zIndex="1"
         >
-          <Box bg="#C9C7EF" borderTopLeftRadius="12" borderTopRightRadius="12">
+          <Box height="50%" bg="#3563E9" borderTopLeftRadius="12" borderTopRightRadius="12">
             <Textarea
               textAlign="center"
-              color="#080721"
+              color="white"
               minH="12"
               mt="2"
               pb="0"
@@ -66,7 +62,7 @@ export const GroupIcon: React.FC<PropsType> = ({ group, variants }) => {
             />
             <RemoveButton id={group.id} removeMethod={handleRemove} />
           </Box>
-          <Box></Box>
+          <Link to={'/' + group.id}><Box width="100%" height="50%"></Box></Link>
         </Box>
       </Box>
     </>

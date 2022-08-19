@@ -32,7 +32,7 @@ interface PropsType {
 
 export const Content: React.FC<PropsType> = ({ notes, searchTab, groups }) => {
   return (
-    <Box as="main" w="100%" pt="8" pl={['0', '20']} pr={['0', '20']} pb="24">
+    <Box as="main" w="100%" pt="6" pl={['0', '14']} pr={['0', '14']} pb="24">
       <Suspense fallback={<div>loading...</div>}>
         <Routes>
           <Route

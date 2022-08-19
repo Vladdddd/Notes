@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
@@ -22,6 +22,10 @@ interface PropsType {
   handleRemove: (id: string) => void
 }
 
+const createDate = (date: string) => {
+  return date.length ? 'Created: ' + date.slice(0, 10) + ', ' + date.slice(11, date.length - 5) : ''
+}
+
 export const Note: React.FC<PropsType> = ({
   note,
   status,
@@ -34,9 +38,7 @@ export const Note: React.FC<PropsType> = ({
 }) => {
   const [text, setText] = useState(note.text)
   const [caption, setCaption] = useState(note.caption)
-  const creationDate = note.id.length
-    ? 'Created: ' + note.id.slice(0, 10) + ', ' + note.id.slice(11, note.id.length - 5)
-    : ''
+  const creationDate = useMemo(() => createDate(note.id), [note.id])
   const isFavorite = path === '/favorites' ? true : false
 
   const onFocusText = (e: { target: { value: string } }) => {
@@ -56,7 +58,7 @@ export const Note: React.FC<PropsType> = ({
           left="0"
           bg="gray.500"
           opacity="0.55"
-          zIndex="100"
+          zIndex="101"
           onClick={() => setIsCreate(false)}
         ></Box>
       </Link>
@@ -72,7 +74,7 @@ export const Note: React.FC<PropsType> = ({
         left={['7.5%', '25%']}
         borderTopRadius="8"
         bg="white"
-        zIndex="100"
+        zIndex="102"
       >
         <Textarea
           color="black"

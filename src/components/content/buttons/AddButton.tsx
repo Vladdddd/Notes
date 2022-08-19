@@ -8,18 +8,31 @@ interface PropsType {
 
 export const AddButton: React.FC<PropsType> = ({ text, addMethod }) => {
   return (
-    <Flex justify="flex-start" mr={['6', '10']}>
-      <ButtonGroup w="32" isAttached>
+    <Flex justify="flex-start">
+      <ButtonGroup w="40" isAttached>
         <IconButton
-          bg="#080721"
-          color="white"
-          aria-label="Add to friends"
+          bg="white"
+          color="#3563E9"
+          aria-label="Add notes"
+          border="2px solid #3563E9"
+          borderRight="0"
           icon={<AddIcon />}
           _focus={{}}
-          _hover={{}}
+          _hover={{
+            bg: '#3563E9',
+            color: 'white',
+            border: '2px solid white',
+          }}
+          _active={{}}
           onClick={addMethod}
         />
-        <Button _focus={{}} border="1.5px solid #080721">
+        <Button
+          _focus={{}}
+          _hover={{ bg: '#3563E9', color: 'white', border: '2px solid white' }}
+          bg="white"
+          color="#3563E9"
+          border={'2px solid #3563E9'}
+        >
           {text}
         </Button>
       </ButtonGroup>

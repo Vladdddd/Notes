@@ -13,7 +13,7 @@ interface PropsType {
 }
 
 const GroupNotes: React.FC<PropsType> = ({ groups, notes, variants, groupId, groupTitle }) => {
-  const caption = groupTitle + ' - Notes'
+  const caption = groupTitle + ' notes'
   const path = '/' + groupId
 
   return (

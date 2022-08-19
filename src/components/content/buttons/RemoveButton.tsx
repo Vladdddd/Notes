@@ -12,6 +12,7 @@ export const RemoveButton: React.FC<PropsType> = ({ id, removeMethod }) => {
       size="sm"
       top="10%"
       right="2%"
+      bg="#F6F7F9"
       pos="absolute"
       color="#080721"
       opacity="0.8"

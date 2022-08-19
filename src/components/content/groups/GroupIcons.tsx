@@ -1,4 +1,4 @@
-import { Flex, Text } from '@chakra-ui/layout'
+import { Box, Flex, Text } from '@chakra-ui/layout'
 import { Route, Routes } from 'react-router-dom'
 
 import { useAppDispatch } from '../../../hooks/redux'
@@ -26,27 +26,28 @@ const GroupIcons: React.FC<PropsType> = ({ groups, variants }) => {
         <Route
           path="/"
           element={
-            <>
-              <Flex justify="space-between" mb="10">
+            <Box>
+              <Flex justify="space-between" mb="10" w="100%" p="6" bg="#3563E9" borderRadius="8">
                 <Text
-                  pl={['6', '0', '0']}
+                  pl={['4', '0', '0']}
                   fontFamily="Inter"
                   fontWeight="500"
-                  fontSize={['20px', '32px']}
+                  fontSize={['16px', '28px']}
                   letterSpacing="-0.24px"
                   lineHeight="10"
+                  color="white"
                 >
                   Groups
                 </Text>
                 <AddButton text={'Add Group'} addMethod={handleSubmit} />
               </Flex>
-              {!groups.length ? <Text>Groups do not exist</Text> : ''}
+              {!groups.length ? <Text ml="1%" mt="4%" fontSize="20px" fontWeight="600">Groups don't exist</Text> : ''}
               <Flex justifyContent={['center', 'flex-start' ,'flex-start']} flexWrap="wrap" mt="5" gap="8">
                 {groups.map((group) => (
                   <GroupIcon group={group} variants={variants} key={group.id} />
                 ))}
               </Flex>
-            </>
+            </Box>
           }
         ></Route>
       </Routes>

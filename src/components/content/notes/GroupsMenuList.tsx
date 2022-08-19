@@ -1,4 +1,4 @@
-import { Button, Menu, MenuButton, MenuItemOption, MenuList, MenuOptionGroup } from '@chakra-ui/react'
+import { Button, Flex, Menu, MenuButton, MenuItemOption, MenuList, MenuOptionGroup, Text } from '@chakra-ui/react'
 import { UpDownIcon } from '@chakra-ui/icons'
 
 import { GroupType } from '../../../store/groupSlice'
@@ -13,11 +13,14 @@ interface PropsType {
 const GroupsMenuList: React.FC<PropsType> = ({ groups, groupTitle, handleChange, calculateCaption }) => {
   return (
     <Menu closeOnSelect={true}>
-      <MenuButton as={Button} bg="#080721" color="white" _focus={{}} _hover={{}}>
-        <UpDownIcon />
+      <MenuButton as={Button} size="sm" bg="#3563E9" color="white" _focus={{}} _hover={{}}>
+        <Flex alignItems="center">
+          <UpDownIcon />
+          <Text ml="1" fontSize={['12px', '16px']}>Group</Text>
+        </Flex>
       </MenuButton>
 
-      <MenuList ml="25%">
+      <MenuList ml="10%">
         <MenuOptionGroup
           defaultValue={groupTitle ? groupTitle : ''}
           title="Groups"

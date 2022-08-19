@@ -21,7 +21,13 @@ export enum StatusEnum {
 }
 
 const initialState: NotesState = {
-  notes: [],
+  notes: [{
+    id: new Date().toISOString(),
+    text: 'It is your first note',
+    caption: 'First Note',
+    groupId: '',
+    isFavorite: false,
+  }],
   filteredNotes: [],
   groupNotes: [],
   searchTab: '',
