@@ -88,7 +88,7 @@ export const NotesList: React.FC<PropsType> = ({ caption, path, notes, groups, v
               w={['85%', '100%', '48.25%', '48.25%', '31%']}
               p="0%" 
               mb="3.5%"
-              h="52" 
+              h="60" 
               key={note.id}
             >
               <Icon groups={groups} note={note} variants={variants} handleRemove={handleRemove}/>

@@ -14,7 +14,7 @@ const theme = extendTheme({
     body: 'Segoe UI, sans-serif',
   },
 })
-//#F6F7F9
+
 function App() {
   const notes = useAppSelector((state) => state.notes.notes)
   const groups = useAppSelector((state) => state.groups.groups)

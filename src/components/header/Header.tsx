@@ -41,15 +41,16 @@ export const Header: React.FC<PropsType> = ({ notes, searchTab }) => {
             0px 9px 46px rgba(71, 116, 138, 0.01), 
             0px 11px 15px rgba(95, 137, 158, 0.01)"
     >
-      <Flex w="100%" justify="flex-start" alignItems="center">
+      <Flex w="100%" justify={['center', 'flex-start']} alignItems="center">
         <InputGroup>
           <InputLeftElement pointerEvents="none" h="44px" children={<SearchIcon color="gray.500" />} />
           <Input
-            w="60%"
+            w={['100%', '100%', '55%']}
             h="44px"
-            color="gray.500"
+            bg="gray.100"
+            color="gray.900"
             border="2px solid"
-            borderColor="#c1d1e5"
+            borderColor="gray.300"
             borderRadius="70px"
             variant="filled"
             placeholder="Search your note"

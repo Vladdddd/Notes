@@ -117,7 +117,7 @@ export const Note: React.FC<PropsType> = ({
           bg="white"
           borderBottomRadius="8"
         >
-          <Text align="center" ml="2" color="gray.800" fontSize="13px">
+          <Text align="center" ml="2" color="gray.800" fontSize="14px" fontWeight="500">
             {creationDate}
           </Text>
           <Link to={path}>

@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
-import { Box } from '@chakra-ui/react'
+import { Box, Text } from '@chakra-ui/react'
 import { lazy, Suspense } from 'react'
 
 import { NoteType } from '../../store/noteSlice'
@@ -33,7 +33,7 @@ interface PropsType {
 export const Content: React.FC<PropsType> = ({ notes, searchTab, groups }) => {
   return (
     <Box as="main" w="100%" pt="6" pl={['0', '14']} pr={['0', '14']} pb="24">
-      <Suspense fallback={<div>loading...</div>}>
+      <Suspense fallback={<Text ml="1%" mt="4%" fontSize="20px" fontWeight="600">loading...</Text>}>
         <Routes>
           <Route
             path="/notes/*"

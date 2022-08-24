@@ -29,8 +29,8 @@ const findGroup = (note: NoteType, groups: GroupType[]) => {
   return note.groupId ? groups.find((group: GroupType) => group.id === note.groupId) : emptyGroup
 }
 
-const calculateCaption = (caption: string) => {
-  return caption.length > 15 ? caption.slice(0, 15) : caption
+const cutText = (caption: string, value: number) => {
+  return caption.length > value ? caption.slice(0, value) + '...' : caption
 }
 
 const calculateWords = (text: string) => {
@@ -42,8 +42,9 @@ export const Icon: React.FC<PropsType> = ({ groups, note, variants, handleRemove
   const [group, setGroup] = useState(emptyGroup)
 
   const findedGroup = useMemo(() => findGroup(note, groups), [note, groups])
-  const caption = useMemo(() => calculateCaption(note.caption), [note.caption])
-  const groupTitle = useMemo(() => calculateCaption(group ? group.title : ''), [group])
+  const caption = useMemo(() => cutText(note.caption, 15), [note.caption])
+  const groupTitle = useMemo(() => cutText(group ? group.title : '', 15), [group])
+  const text = useMemo(() => cutText(note ? note.text : '', 75), [note])
   const words = useMemo(() => calculateWords(note.text ? note.text : ''), [note.text])
 
   useEffect(() => {
@@ -66,13 +67,13 @@ export const Icon: React.FC<PropsType> = ({ groups, note, variants, handleRemove
       w="100%"
       h="100%"
       pos="relative"
-      boxShadow="rgba(149, 157, 165, 0.01) 0px 8px 24px"
+      boxShadow="rgba(149, 157, 165, 0.04) 0px 8px 24px"
     >
       <Link to={note.id}>
         <Box p="6" pt="4" pb="16" w="100%" h="100%" borderRadius="5" bg="white">
           <Text
             h="max-content"
-            fontSize={['17px', '19px', '21px', '23px']}
+            fontSize={['18px', '20px', '22px', '24px']}
             fontWeight="600"
             letterSpacing="0.03em"
             color="gray.900"
@@ -80,13 +81,10 @@ export const Icon: React.FC<PropsType> = ({ groups, note, variants, handleRemove
           >
             {caption}
           </Text>
-          {group && group.title.length ? (
-            <Text color="#90A3BF" fontSize={['11px', '13px', '15px', '17px']}>
-              {groupTitle}
-            </Text>
-          ) : (
-            ''
-          )}
+          <Text color="#90A3BF" fontSize={['12px', '14px', '16px', '18px']}>
+            {group && group.title.length ? groupTitle : 'Without group'}
+          </Text>
+          <Text mt="6" color="gray.900">{text}</Text>
         </Box>
       </Link>
       <RemoveButton id={note.id} removeMethod={handleRemove} />
@@ -100,7 +98,7 @@ export const Icon: React.FC<PropsType> = ({ groups, note, variants, handleRemove
           groups={groups}
           groupTitle={groupTitle}
           handleChange={handleChange}
-          calculateCaption={calculateCaption}
+          cutText={cutText}
         />
 
         <IconButton

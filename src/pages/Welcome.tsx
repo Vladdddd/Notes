@@ -1,79 +1,118 @@
 import { Box, Text, Flex, Button, Link, Image } from '@chakra-ui/react'
 import { Link as RouterLink } from 'react-router-dom'
 
-import group from '../assets/group.svg'
 import welcome from '../assets/welcome.svg'
-import notes from '../assets/notes.svg'
 
 interface PropsType {
   notesLength: number
   groupsLength: number
 }
 
+type DesctiptionArrType = {
+  name: string
+  amount: number
+  url: string
+}
+
 export const Welcome: React.FC<PropsType> = ({ notesLength, groupsLength }) => {
+  const descriptionArr: DesctiptionArrType[] = [
+    {
+      name: 'Notes',
+      amount: notesLength,
+      url: '/notes',
+    },
+    {
+      name: 'Groups',
+      amount: groupsLength,
+      url: '/groups',
+    },
+  ]
+
   return (
     <Flex
-      m="4%"
-      mt={['10%', '10%', '10%', '5%']}
-      justify={['center', 'center', 'space-around']}
-      align={['center', 'center', 'initial']}
-      direction={['column', 'column', 'row']}
+      m="2.5%"
+      mt={['5%', '5%', '5%', '2.5%']}
+      justify={['center', 'center', 'center', 'space-around']}
+      align={['center', 'center', 'center', 'initial']}
+      direction={['column', 'column', 'column', 'row']}
     >
-      <Flex w={['85%', '85%', '35%', '30%']} mb="4%" direction="column" align={['center', 'initial']}>
-        <Text mb={['2', '4']} fontFamily="Inter" fontSize={['18px', '26px', '30px']}>
-          Welcome to Notes
-        </Text>
-        <Text fontSize={['12px', '16px']}>
-          In this app you can <b>save</b> your notes and <b>group</b> they
-        </Text>
+      <Flex mb="4%" w={['90%', '85%', '80%', '50%']} align={['center', 'initial']} direction="column">
+        <Box p="6" bg="#3563E9" color="white" borderRadius="8">
+          <Text mb={['2', '4']} fontFamily="Inter" fontSize={['12px', '20px', '24px']}>
+            Welcome to Notes
+          </Text>
+          <Text fontSize={['10px', '10px', '14px']}>
+            In this app you can <b>save</b> your notes and <b>group</b> them Lorem ipsum dolor sit, amet consectetur
+            adipisicing elit. Sint <b>natus</b> impedit, aliquid provident tempora dolor molestiae delectus iste cum ut
+            quis
+          </Text>
+        </Box>
+
         <Image
           src={welcome}
           pos="absolute"
-          left={[0, 0, '2%', '2%', '5%']}
-          top={[0, 0, '35%', '32%']}
-          w={[0, 0, '55%', '50%', '40%']}
-          display={['none', 'none', 'initial']}
+          left="25%"
+          top="40%"
+          w={[0, 0, '45%', '40%', '35%']}
+          display={['none', 'none', 'none', 'initial']}
         />
       </Flex>
-      <Box
-        bg="white"
-        textAlign="center"
-        w={['90%', '90%', '50%', '60%']}
-        h={['60vh', '60vh', '55vh', '70vh']}
-        p={['2', '4']}
-        mt={['12%', '0']}
-        borderRadius="12"
-        boxShadow="0px 24px 38px rgba(47, 53, 57, 0.03), 
-        0px 9px 46px rgba(71, 116, 138, 0.02), 
-        0px 11px 15px rgba(95, 137, 158, 0.04)"
-      >
-        <Text fontFamily="Inter" fontSize={['16px', '26px']} mt="4" mb="0">
-          Your Items
-        </Text>
-        <Flex pt="6" justify="space-around" align="center" h="85%" direction={['column', 'column', 'row']}>
-          <Link as={RouterLink} to="/notes" w={['95%', '95%', '47%']} h="100%" mb={['15%', '10%', '0']} _hover={{}}>
-            <Button
-              w="100%"
-              h="100%"
-              fontSize={['16px', '18px', '20px', '24px']}
-              borderRadius="0"
-              _hover={{ bg: '#E2E8F0', bgImage: notes, bgSize: '25%', bgRepeat: 'repeat' }}
-            >
-              Your Notes: {notesLength}
-            </Button>
-          </Link>
-          <Link as={RouterLink} to="/groups" w={['95%', '95%', '47%']} h="100%" _hover={{}}>
-            <Button
-              w="100%"
-              h="100%"
-              fontSize={['16px', '18px', '20px', '24px']}
-              borderRadius="0"
-              _hover={{ bg: '#E2E8F0', bgImage: group, bgSize: '25%', bgRepeat: 'repeat' }}
-            >
-              Your Groups: {groupsLength}
-            </Button>
-          </Link>
-        </Flex>
+
+      <Box w={['90%', '85%', '80%', '45%']}>
+        {descriptionArr.map((el) => {
+          return (
+            <Box key={el.name}>
+              <Box mt={['12%', '0']} w="100%" h="1.5vh" bg="#3563E9" borderTopRadius="8"></Box>
+              <Box
+                p={['2', '4']}
+                pl={['6', '12']}
+                pr={['6', '12']}
+                mb={['10%', '5%']}
+                bg="white"
+                textAlign="start"
+                h="auto"
+                borderBottomRadius="8"
+                boxShadow="0px 24px 38px rgba(47, 53, 57, 0.03), 
+                        0px 9px 46px rgba(71, 116, 138, 0.02), 
+                        0px 11px 15px rgba(95, 137, 158, 0.04)"
+              >
+                <Flex mt="4" mb="6" fontFamily="Inter" alignItems="center">
+                  <Text mr="4" color="black" fontSize={['10px', '22px']}>
+                    Your {el.name}
+                  </Text>
+                  <Text p="1" pl="3" pr="3" bg="#3563E9" color="white" borderRadius="6" fontSize={['8px', '16px']}>
+                    {el.amount}
+                  </Text>
+                </Flex>
+
+                <Box>
+                  <Text mb="8" color="#596780" fontSize={['12px', '12px', '14px', '18px']}>
+                    Details about {el.name}. You can Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                    Necessitatibus quibusdam tenetur quam maxime sapiente!
+                  </Text>
+
+                  <Flex justifyContent="flex-end">
+                    <Link as={RouterLink} to={el.url} w={['45%', '65%', '50%']} _hover={{}}>
+                      <Button
+                        pt="2"
+                        pb="2"
+                        w="100%"
+                        bg="#3563E9"
+                        color="white"
+                        border="2px solid white"
+                        fontSize={['12px', '14px', '16px', '18px']}
+                        borderRadius={['4', '8']}
+                        _hover={{ bg: 'white', color: '#3563E9', border: '2px solid #3563E9' }}
+                      >
+                        Go there
+                      </Button>
+                    </Link>
+                  </Flex>
+                </Box>
+              </Box>
+            </Box>
+          )
+        })}
       </Box>
     </Flex>
   )

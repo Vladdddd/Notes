@@ -7,10 +7,10 @@ interface PropsType {
   groups: GroupType[]
   groupTitle?: string
   handleChange: (value: string | string[]) => void
-  calculateCaption: (caption: string) => string
+  cutText: (caption: string, value: number) => string
 }
 
-const GroupsMenuList: React.FC<PropsType> = ({ groups, groupTitle, handleChange, calculateCaption }) => {
+const GroupsMenuList: React.FC<PropsType> = ({ groups, groupTitle, handleChange, cutText }) => {
   return (
     <Menu closeOnSelect={true}>
       <MenuButton as={Button} size="sm" bg="#3563E9" color="white" _focus={{}} _hover={{}}>
@@ -30,7 +30,7 @@ const GroupsMenuList: React.FC<PropsType> = ({ groups, groupTitle, handleChange,
           {groups.map((group: GroupType) => {
             return (
               <MenuItemOption value={group.id} key={group.id}>
-                {calculateCaption(group.title)}
+                {cutText(group.title, 15)}
               </MenuItemOption>
             )
           })}
